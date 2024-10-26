@@ -1,0 +1,67 @@
+# General
+node_modules/
+dist/
+build/
+.env
+.DS_Store
+.vscode/
+.idea/
+*.log
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+*.eggs/
+*.pytest_cache/
+*.coverage
+coverage.xml
+*.pyo
+*.pyd
+*.pydist
+.Python
+pip-log.txt
+.tox/
+.mypy_cache/
+.pytest_cache/
+*.pyc
+*.ipynb_checkpoints
+# Jupyter Notebook
+.ipynb_checkpoints/
+# PyInstaller
+dist/
+build/
+*.spec
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.cache/
+.coverage
+coverage.*
+nosetests.xml
+*.cover
+*.py,cover
+.hypothesis/
+.pyre/
+.pytype/
+*.data/
+# Pyright
+typings/
+
+# React
+node_modules/
+*.env.local
+*.env.development.local
+*.env.test.local
+*.env.production.local
+.yarn/
+.yarn-cache/
+# npm debug log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+# Coverage directory used by testing tools
+coverage/
+# production build
+build/
+.venv
