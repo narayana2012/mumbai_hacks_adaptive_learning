@@ -49,7 +49,7 @@ class UtilProcessor:
         # )
 
         model_id = "us.meta.llama3-2-90b-instruct-v1:0"
-        self.aws_llm = BedrockLLM(
+        self.llm = BedrockLLM(
             credentials_profile_name="pocs",
             model_id=model_id,
             region_name="us-east-1",
@@ -117,7 +117,7 @@ class UtilProcessor:
         {context}<|eot_id|><|start_header_id|>assistant<|end_header_id|>
             """
 
-        response = self.aws_llm.invoke(chat_prompt)
+        response = self.llm.invoke(chat_prompt)
         return response.strip() if response else "No response received"
     
     def get_llm_response_old(self,system_context,user_message):

@@ -209,7 +209,7 @@ const AssessmentDialog = ({
             ))}
           </DialogContent>
           <DialogActions style={{ justifyContent: "space-between" }}>
-            <div>
+            {/* <div>
               {showStudyMore && (
                 <Button
                   color="primary"
@@ -221,7 +221,7 @@ const AssessmentDialog = ({
                   Study More
                 </Button>
               )}
-            </div>
+            </div> */}
             <div>
               <Button
                 onClick={handleDialogClose}

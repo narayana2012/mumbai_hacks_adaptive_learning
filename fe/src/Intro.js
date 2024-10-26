@@ -35,11 +35,13 @@ const Intro = () => {
       sx={{ margin: "auto" }}
     >
       <Typography variant="h6" gutterBottom>
-        An adaptive learning app using a multi-step process to ensure
-        understanding. Students start with standard explanations and are tested
-        on comprehension. If needed, simpler content with detailed examples
-        follows. For further support, dialogue-based, byte-by-byte guided
-        learning is provided to ensure mastery at each step.
+        An adaptive learning app that <b>personalizes content</b> by using each
+        learner's background to create <b>relatable analogies</b>, enhancing
+        understanding through a <b>multi-step approach</b>. Students begin with
+        standard explanations and are assessed on comprehension. If additional
+        support is needed, simpler content with detailed examples is provided.
+        For deeper guidance, a <b>dialogue-based, step-by-step </b> walkthrough
+        ensures mastery at every stage of learning.
       </Typography>
       <FormControl fullWidth margin="normal">
         <InputLabel id="field-select-label">Select Field</InputLabel>

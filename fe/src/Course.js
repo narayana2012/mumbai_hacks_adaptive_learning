@@ -133,34 +133,23 @@ Also add a prefix to emphasize that it is a iterative learning process as studen
 
 const summary_prompt = `
 
-You are an expert computer science professor who excels in giving care to every learner in the pace and depth he needs. Consider the learner is 
-from civil engineering field and he is learning computer science for the first time. Please make sure all stories you create belong to the
-field of civil engineering, so that learner can easily understand the concept.
+Read the question responses from the following {input}. 
 
-This is second iteration of learning process as student failed to gain subject understanding as per the content provided {input} between [BEGIN MY QUESTION and ANSWERS] and [END MY QUESTION and ANSWERS]. 
-
-You need to teach subjects to non computer science graduates and you need to have more simple real world analogies and detailed explanations with minimum to 2 examples.
-
-Read the content {input} provided between [BEGIN MY QUESTION and ANSWERS] and [END MY QUESTION and ANSWERS], which includes questions, my responses (user_input), and the feedback I received on each answer. It is essential that you detect and address *all* instances of incorrect, incomplete, or missing responses based on the user_input and feedback provided—no errors should be overlooked.
+It is essential that you detect and address *all* instances of incorrect, incomplete, or missing responses based on the user_input and feedback provided—no errors should be overlooked.
  
 For each sub-topic, use these guidelines:
  
 1. **If my response is missing** in the user_input field:
    - Assume I may need foundational knowledge or increased engagement in this sub-topic.
-   - Use the question and feedback to determine the sub-topic needing clarification. Begin with a full, clear explanation of the basics, covering why it’s important in the broader context.
-   - Provide examples that start simple and grow in complexity, ensuring that each step builds my understanding progressively.
- 
+   - Use the question and feedback to determine the sub-topic needing clarification. 
+
 2. **If my response is incorrect or lacks depth**:
    - Carefully analyze my answer and the feedback to identify any misunderstandings related to the sub-topic.
-   - Address my specific error by explaining why my approach or reasoning was incorrect and guiding me toward the correct understanding.
-   - Use engaging examples that build from basic to advanced to reinforce the correct approach.
- 
+   
 Summarize my understanding of the topic and provide me a feedback.
-
 Also add a prefix to emphasize that it is a iterative learning process as student has not gained the subject understanding in standart for of learning current content 
 
-# Notes
- 
+# Notes 
 - If areas for improvement are more numerous than strengths, inform the user that enhanced learning is suggested and offer an option to connect with a teaching assistant for additional help.`;
 
 const url = "http://localhost:8080";
@@ -229,10 +218,11 @@ function Course() {
     }
   };
 
-  const fetchSummary = async (history = null) => {
+  const fetchSummary = async (apiResponse) => {
     setLoading(true);
     try {
-      const inputResposne = `${JSON.stringify(userResponses)}`;
+      const inputResposne = `${JSON.stringify(apiResponse)}`;
+      console.log({ inputResposne, userResponses });
       const response = await axios.post(`${url}/llm-response`, {
         prompt: summary_prompt,
         input: inputResposne,
@@ -250,6 +240,7 @@ function Course() {
 
   const handleAssessmentSubmit = (apiResponse) => {
     // fetchSummary()
+    console.log({ apiResponse });
     setUserResponses(apiResponse);
     setCount(count + 1);
     const allCorrect = apiResponse.every((q) => q.status === "1");
@@ -257,16 +248,16 @@ function Course() {
     if (allCorrect) {
       navigate("/");
     } else {
-      handleIncorrectAnswers();
+      handleIncorrectAnswers(apiResponse);
     }
   };
 
-  const handleIncorrectAnswers = async () => {
+  const handleIncorrectAnswers = async (apiResponse) => {
     if (count >= 1) {
-      fetchSummary();
+      fetchSummary(apiResponse);
     } else {
       // await fetchTopicContent(topicHistory);
-      fetchSummary();
+      fetchSummary(apiResponse);
     }
   };
 
